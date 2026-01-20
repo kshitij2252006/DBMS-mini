@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Bookings - EventHub</title>
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">EventHub</div>
+      <ul class="nav-menu">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="create-event.html">Create Event</a></li>
+        <li><a href="bookings.html" class="active">My Bookings</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <section class="page-header">
+      <h1>My Bookings</h1>
+      <p>View and manage your event bookings</p>
+    </section>
+
+    <section class="bookings-list" style="padding: 2rem 0;">
+      <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 1rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <h3 style="color: #333; margin-bottom: 10px;">Summer Music Festival</h3>
+            <p style="color: #666;">📅 June 15, 2026 | 📍 Bandra West, Mumbai</p>
+            <p style="color: #666;">🎫 Ticket ID: #EH2026001</p>
+          </div>
+          <div>
+            <span style="background: #4ade80; color: white; padding: 8px 16px; border-radius: 20px; font-weight: bold;">Confirmed</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 1rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <h3 style="color: #333; margin-bottom: 10px;">Championship Finals</h3>
+            <p style="color: #666;">📅 July 20, 2026 | 📍 Wankhede Stadium, Mumbai</p>
+            <p style="color: #666;">🎫 Ticket ID: #EH2026002</p>
+          </div>
+          <div>
+            <span style="background: #fbbf24; color: white; padding: 8px 16px; border-radius: 20px; font-weight: bold;">Pending</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; padding: 3rem; color: #f6f3f3;">
+        <p>No more bookings found</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <span>© 2026 EventHub</span>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Support</a>
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
