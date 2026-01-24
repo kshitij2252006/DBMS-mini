@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/home.css">
 </head>
-<body>
+<body id="vanta-bg">
 
   <!-- Navigation Bar -->
   <nav class="navbar">
@@ -79,6 +79,21 @@
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+  <script>
+    VANTA.FOG({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200,
+      minWidth: 200,
+      highlightColor: 0x12ff,
+      midtoneColor: 0xe03922,
+      baseColor: 0xbe7df2
+    })
+  </script>
   <script src="js/main.js"></script>
 </body>
 </html>

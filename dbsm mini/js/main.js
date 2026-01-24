@@ -23,6 +23,34 @@ function setupHeroImageSlider() {
   }
 }
 
+// Build marquee items from heroImages and duplicate for seamless scroll
+function setupMarqueeFromHeroImages() {
+  const track = document.querySelector('.marquee-track');
+  if (!track) return;
+
+  // Helper to resize Unsplash URLs to small tiles
+  const toTileSize = (url) => url
+    .replace(/w=\d+/i, 'w=1000')
+    .replace(/h=\d+/i, 'h=700');
+
+  // Clear and build first sequence
+  track.innerHTML = '';
+  heroImages.forEach((url, i) => {
+    const item = document.createElement('div');
+    item.className = 'marquee-item';
+
+    const img = document.createElement('img');
+    img.src = toTileSize(url);
+    img.alt = `Background ${i + 1}`;
+    item.appendChild(img);
+    track.appendChild(item);
+  });
+
+  // Duplicate sequence for seamless loop
+  const cloneHTML = track.innerHTML;
+  track.insertAdjacentHTML('beforeend', cloneHTML);
+}
+
 // Check if user is logged in
 window.addEventListener('load', function() {
   const user = localStorage.getItem('user');
@@ -49,6 +77,9 @@ window.addEventListener('load', function() {
   
   // Setup hero image slider
   setupHeroImageSlider();
+
+  // Setup marquee from heroImages
+  setupMarqueeFromHeroImages();
 });
 
 // Logout functionality (only where logout button exists, e.g., profile page)
