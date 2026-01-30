@@ -179,9 +179,6 @@ function setupLogoNavigation() {
 
 // Logout button handler
 const logoutBtn = document.getElementById('logout');
-
-// Logout button handler
-const logoutBtn = document.getElementById('logout');
 if (logoutBtn) {
   logoutBtn.addEventListener('click', function(e) {
     e.preventDefault();
