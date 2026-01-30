@@ -1,0 +1,21 @@
+name: Main Branch CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Verify branch
+      run: |
+        echo "Running on branch: ${{ github.ref }}"
+        echo "Base branch: ${{ github.base_ref }}"
+        echo "This workflow only runs for main branch - no master branch needed"
