@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - EventHub</title>
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body id="vanta-bg">
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">EventHub</div>
+      <ul class="nav-menu">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="create-event.html">Create Event</a></li>
+        <li><a href="bookings.html">My Bookings</a></li>
+        <li><a href="profile.html" class="active">Profile</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <section class="page-header">
+      <h1>Your Profile</h1>
+      <p>Manage your account and preferences</p>
+    </section>
+
+    <section class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar-section">
+          <div class="profile-avatar" id="profileAvatar">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8oghbsuzggpkknQSSU-Ch_xep_9v3m6EeBQ&s" alt="Avatar" id="avatarImg">
+            <div class="avatar-upload-overlay">
+              <label for="avatarInput" class="avatar-upload-label">Change Photo</label>
+            </div>
+            <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+          </div>
+        </div>
+        <div class="profile-info">
+          <div class="profile-info-fields">
+            <div class="profile-field">
+              <h3 id="profileName">User</h3>
+              <input type="text" id="profileNameInput" class="profile-input" style="display: none;">
+            </div>
+            <div class="profile-field">
+              <p id="profileEmail">user@example.com</p>
+              <input type="email" id="profileEmailInput" class="profile-input" style="display: none;">
+            </div>
+          </div>
+          <div>
+            <button id="editProfileBtn" class="btn-edit">Edit Profile</button>
+            <button id="saveProfileBtn" class="btn-save" style="display: none;">Save Changes</button>
+          </div>
+        </div>
+      </div>
+      <div class="profile-details">
+        <div>
+          <h4>Member Since</h4>
+          <p id="profileSince">--</p>
+        </div>
+        <div>
+          <h4>Total Bookings</h4>
+          <p id="profileBookings">--</p>
+        </div>
+      </div>
+      <button id="logout" class="btn-submit" style="max-width: 200px; margin-top: 1.5rem;">Logout</button>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <span>© 2026 EventHub</span>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Support</a>
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Populate profile info
+    const userDataRaw = localStorage.getItem('user');
+    if (userDataRaw) {
+      const userData = JSON.parse(userDataRaw);
+      const name = userData.fullname || userData.email?.split('@')[0] || 'User';
+      const email = userData.email || 'user@example.com';
+      const since = userData.createdAt ? new Date(userData.createdAt).toLocaleDateString() : '2024';
+      document.getElementById('profileName').textContent = name;
+      document.getElementById('profileEmail').textContent = email;
+      document.getElementById('profileSince').textContent = since;
+      
+      // Set name and email in inputs
+      document.getElementById('profileNameInput').value = name;
+      document.getElementById('profileEmailInput').value = email;
+    }
+
+    // Simple bookings count from localStorage if present
+    const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+    document.getElementById('profileBookings').textContent = bookings.length;
+
+    // Avatar upload functionality
+    const avatarInput = document.getElementById('avatarInput');
+    const avatarImg = document.getElementById('avatarImg');
+    
+    // Load saved avatar from localStorage
+    const savedAvatar = localStorage.getItem('userAvatar');
+    if (savedAvatar) {
+      avatarImg.src = savedAvatar;
+    }
+    
+    avatarInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          avatarImg.src = event.target.result;
+          localStorage.setItem('userAvatar', event.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Edit profile functionality
+    const editBtn = document.getElementById('editProfileBtn');
+    const saveBtn = document.getElementById('saveProfileBtn');
+    const nameDisplay = document.getElementById('profileName');
+    const emailDisplay = document.getElementById('profileEmail');
+    const nameInput = document.getElementById('profileNameInput');
+    const emailInput = document.getElementById('profileEmailInput');
+
+    editBtn.addEventListener('click', function() {
+      // Show inputs, hide displays
+      nameDisplay.style.display = 'none';
+      emailDisplay.style.display = 'none';
+      nameInput.style.display = 'block';
+      emailInput.style.display = 'block';
+      
+      // Toggle buttons
+      editBtn.style.display = 'none';
+      saveBtn.style.display = 'inline-block';
+    });
+
+    saveBtn.addEventListener('click', function() {
+      // Get updated values
+      const newName = nameInput.value.trim();
+      const newEmail = emailInput.value.trim();
+      
+      // Update displays
+      nameDisplay.textContent = newName;
+      emailDisplay.textContent = newEmail;
+      
+      // Save to localStorage
+      const userData = JSON.parse(localStorage.getItem('user') || '{}');
+      userData.fullname = newName;
+      userData.email = newEmail;
+      localStorage.setItem('user', JSON.stringify(userData));
+      
+      // Show displays, hide inputs
+      nameDisplay.style.display = 'block';
+      emailDisplay.style.display = 'block';
+      nameInput.style.display = 'none';
+      emailInput.style.display = 'none';
+      
+      // Toggle buttons
+      editBtn.style.display = 'inline-block';
+      saveBtn.style.display = 'none';
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+  <script>
+    VANTA.FOG({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200,
+      minWidth: 200,
+      highlightColor: 0x12ff,
+      midtoneColor: 0xe03922,
+      baseColor: 0xbe7df2
+    })
+  </script>
+</body>
+</html>

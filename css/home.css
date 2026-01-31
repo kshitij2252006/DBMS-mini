@@ -7,7 +7,7 @@
 /* Page transition animations */
 @keyframes fadeIn {
   from {
-    opacity: 0;
+    opacity: 1;
   }
   to {
     opacity: 1;
@@ -19,7 +19,7 @@
     opacity: 1;
   }
   to {
-    opacity: 0;
+    opacity: 1;
   }
 }
 
@@ -33,13 +33,13 @@
   font-size: 3rem;
   font-weight: 800;
   letter-spacing: 0.5px;
-  background: linear-gradient(to right, #26dc5a, #e9ed10);
+  background: linear-gradient(to right, #26dc5a, #dbc3f2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.2s ease;
 }
 
 .navbar,
@@ -59,12 +59,12 @@ body.fade-out .site-footer {
 }
 
 body {
-  animation: fadeIn 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: fadeIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
 }
 
 body.fade-out {
-  animation: fadeOut 0.2s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+  animation: fadeOut 0.6s cubic-bezier(0.4, 0, 0.6, 1) forwards;
   opacity: 0;
 }
 
@@ -147,6 +147,37 @@ body {
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+}
+
+.marquee-item:hover {
+  transform: scale(1.06);
+  z-index: 10;
+}
+
+.marquee-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.marquee-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.marquee-dot.active {
+  background: #a855f7;
+  width: 24px;
+  border-radius: 4px;
+}
+
+.marquee-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .marquee-item:hover {
@@ -586,7 +617,7 @@ body {
 
 /* Create Event Form Styles */
 .create-event-form {
-  max-width: 600px;
+  max-width: 600px;     
   margin: 2rem auto;
   background: rgba(30, 20, 30, 0.18);
   padding: 2rem;
